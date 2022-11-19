@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+url=$1
+patch_file=patches/${url##*/}
+wget $1 -P patches
+[ -f "$patch_file" ] && patch < $patch_file && git add $patch_file && git add dwm.c
+
