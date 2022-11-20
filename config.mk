@@ -1,5 +1,5 @@
 # dwm version
-VERSION = 6.4
+VERSION = 6.4-exia
 
 # Customize below to fit your system
 
