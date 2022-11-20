@@ -58,10 +58,10 @@ static const Layout layouts[] = {
 #define MODKEY Mod1Mask
 #define WINKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+	{ WINKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+	{ WINKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ WINKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ WINKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -69,7 +69,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = {"kitty", "-e", "--single-instance", NULL};
 static const char *rofidruncmd[] = {"rofi", "-show", "drun", NULL};
 static const char *windowswitchcmd[] = {"rofi", "-show", "window", NULL};
 static const char *upvol[] = {"pactl", "set-sink-volume", "0", "+3%", NULL};
@@ -80,6 +80,12 @@ static const char *downbrt[] = {"light", "-U", "5", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ WINKEY,                       XK_q,      killclient,     {0} },
+	{ WINKEY,                       XK_f,      spawn,          SHCMD("subl") },
+	{ WINKEY,                       XK_e,      spawn,          SHCMD("kitty -e nnn") },
+	{ WINKEY,                       XK_o,      spawn,          SHCMD("thunar") },
+	{ WINKEY,                       XK_s,      spawn,          SHCMD("flameshot gui") },
+	{ WINKEY,                       XK_t,      spawn,          {.v = termcmd } },
 	{ WINKEY,                       XK_r,      spawn,          {.v = rofidruncmd } },
 	{ WINKEY,                       XK_w,      spawn,          {.v = windowswitchcmd } },
 	{ WINKEY,                       XK_Page_Up,spawn,          {.v = upvol } },
@@ -95,7 +101,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
+	{ WINKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
