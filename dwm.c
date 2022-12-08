@@ -1724,14 +1724,14 @@ runautostart(void)
 		/* the XDG conformant path does not exist or is no directory
 		 * so we try ~/.dwm instead
 		 */
-		char *pathpfx_new = realloc(pathpfx, strlen(home) + strlen(dwmdir) + 3);
+		char *pathpfx_new = realloc(pathpfx, strlen(home) + strlen(dwmdir) + 3 + 6);
 		if(pathpfx_new == NULL) {
 			free(pathpfx);
 			return;
 		}
 		pathpfx = pathpfx_new;
 
-		if (sprintf(pathpfx, "%s/.%s", home, dwmdir) <= 0) {
+		if (sprintf(pathpfx, "%s/.config/%s", home, dwmdir) <= 0) {
 			free(pathpfx);
 			return;
 		}
