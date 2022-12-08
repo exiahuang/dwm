@@ -81,8 +81,11 @@ static const char *downbrt[] = {"light", "-U", "5", NULL};
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ WINKEY,                       XK_q,      killclient,     {0} },
+	{ WINKEY,                       XK_b,      spawn,          SHCMD("min") },
 	{ WINKEY,                       XK_f,      spawn,          SHCMD("subl") },
-	{ WINKEY,                       XK_e,      spawn,          SHCMD("kitty -e nnn") },
+	{ WINKEY,                       XK_e,      spawn,          SHCMD("lapce") },
+	{ WINKEY,                       XK_n,      spawn,          SHCMD("kitty -e nnn") },
+	{ WINKEY,                       XK_m,      spawn,          SHCMD("kitty -e termusic -c") },
 	{ WINKEY,                       XK_o,      spawn,          SHCMD("thunar") },
 	{ WINKEY,                       XK_s,      spawn,          SHCMD("flameshot gui") },
 	{ WINKEY,                       XK_t,      spawn,          {.v = termcmd } },
